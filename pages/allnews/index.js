@@ -10,7 +10,7 @@ import News4 from '../../src/components/News4';
 
 
 
-function Index({ }) {
+function Index() {
     const router = useRouter()
     const path = router.query.title
 

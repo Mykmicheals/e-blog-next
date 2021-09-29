@@ -52,7 +52,7 @@ function Auth() {
         const data = await response.json()
 
         if (data.token) {
-            router.push('/dashboard', { shallow: true })
+            router.push('/', { shallow: true })
             dispatch(authActions.login())
             dispatch(authActions.setUsername(data.first_name))
             dispatch(authActions.setToken(data.token))

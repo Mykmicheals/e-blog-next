@@ -10,6 +10,7 @@ function Nav({ showNav, width }) {
     const isLoggedIn = auth.isLoggedIn
     return (
         <div className={`bg-gray-400 shadow-2 h-screen ${widths} z-10 left-0 fixed top-0 ts`}>
+
             <Link href='/'>
                 <div className='flex'>
                     <h1 className='cursor-pointer text-3xl font-bold text-red-600 my-10 mx-3'>Essential</h1>
@@ -18,17 +19,64 @@ function Nav({ showNav, width }) {
 
 
             <div className='my-2'>
-                <p className={pClass}>Home</p>
+                {/* <p className={pClass}>Home</p>
                 <p className={pClass}>World Cup</p>
                 <p className={pClass}>Lifestlye</p>
                 <p className={pClass}>Economy</p>
-                <p className={pClass}>Politics</p>
+                <p className={pClass}>Politics</p> */}
+
+                <Link href='/'>
+                    <p className={pClass}>Home</p>
+                </Link>
+
+                <Link href={{
+                    pathname: `/allnews/`,
+                    query: {
+                        title: 'posts',
+                        name: 'posts'
+                    },
+                }}>
+
+                    <p className={pClass}>User Posts</p>
+                </Link>
+                <Link href={{
+                    pathname: `/allnews/`,
+                    query: {
+                        title: 'Lifestyle',
+                        name: 'lifestyle'
+                    },
+                }}>
+                    <p className={pClass}>Lifestlye</p>
+                </Link>
+
+                <Link
+                    href={{
+                        pathname: `/allnews/`,
+                        query: {
+                            title: 'Economy',
+                            name: 'economy'
+                        },
+                    }}
+                >
+                    <p className={pClass}>Economy</p>
+                </Link>
+
+
+
+                <Link href={{
+                    pathname: `/allnews/`,
+                    query: {
+                        title: 'Poltics',
+                        name: 'politics'
+                    },
+                }}>
+                    <p className={pClass}>Politics</p>
+                </Link>
+
             </div>
 
             <div className='lg:flex gap-10 '>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-red-800 mr-5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                </svg>
+            
 
                 {isLoggedIn ?
                     <Link href='/dashboard'>
