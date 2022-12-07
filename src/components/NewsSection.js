@@ -9,6 +9,8 @@ var h2Class = 'font-bold text-xl my-3  font-sans pb-5 ml-1 border-b-2 border-gra
 
 function NewsSection({data}) {
   return (
+
+    <div>
     <div className='flex  justify-center mx-10 my-10 flex-col lg:flex-row'>
        
     <News4 
@@ -20,7 +22,7 @@ function NewsSection({data}) {
       <News2 
     title= 'Latest News'
     data = {data}
-    category = 'Headline'
+    category = 'Featured'
       />
 
 
@@ -31,7 +33,66 @@ function NewsSection({data}) {
     />
 
 
+      </div>
+      
+
+      <div className='flex justify-center mx-10 my-10 flex-col lg:flex-row'>
+
+        <News4
+          title='Politics'
+          data={data}
+          category='Politics'
+        />
+
+
+        <News4
+          title='Politics'
+          data={data}
+          category='Politics'
+        />
+
+
+        <News4
+          title='Politics'
+          data={data}
+          category='Politics'
+        />
+
+
+        <News4
+          title='Politics'
+          data={data}
+          category='Politics'
+        />
+      </div>
+
+      <div className='flex  justify-center mx-10 my-10 flex-col lg:flex-row'>
+
+        <News4
+          title='Tech News'
+          data={data}
+          category='Tech'
+        />
+
+        <News2
+          title='Latest News'
+          data={data}
+          category='Featured'
+        />
+
+
+        <News4
+          title='Politics'
+          data={data}
+          category='Politics'
+        />
+
+
+      </div>
+
     </div>
+
+
   )
 }
 

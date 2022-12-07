@@ -70,7 +70,7 @@ function WriteBlog() {
       .then(result => {console.log(result)
         // toast.success('post sent for approval')})
       .catch(error => {console.log('error', error)
-;
+
     })
       
       setTimseout(() => {

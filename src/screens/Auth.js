@@ -7,7 +7,8 @@ import { useDispatch } from 'react-redux';
 import { authActions } from '../store/index';
 
 
-export const APPURL = 'http://userauth.pythonanywhere.com'
+// export const APPURL = 'http://userauth.pythonanywhere.com'
+export const APPURL = 'http://127.0.0.1:8000'
 
 function Auth() {
     const router = useRouter();
@@ -73,9 +74,13 @@ function Auth() {
                     <h3>{signup ? 'Signup' : 'Login'}</h3>
                     <div className='my-2'>
                         {signup && <TextField onChange={handleInput} className='my-9 block w-full' id="outlined-basic" size='small' label="Username" name='first_name' variant="outlined" />}
+
                         <TextField onChange={handleInput} className='my-9 block' id="outlined-basic" size='small' name='email' label="Email" variant="outlined" />
+
                         <TextField onChange={handleInput} className='my-9 block' id="outlined-basic" size='small' type="password" name='password' label="Password" variant="outlined" />
+
                         {signup && <TextField onChange={handleInput} className='my-9 block' id="outlined-basic" size='small' type="password" label="Confirm Password" variant="outlined" />}
+                        
                     </div>
                     <LoadingButton loading={fetchLoading} onClick={authHandler} className='hover:bg-red-700 bg-red-600 text-white px-16 '>{signup ? 'Signup' : 'Login'}</LoadingButton>
 

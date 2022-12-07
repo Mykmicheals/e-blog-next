@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { TextField } from '@mui/material/'
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { EditorState, convertToRaw } from 'draft-js';
+import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import dynamic from 'next/dynamic'
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -11,37 +11,48 @@ import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import { useSelector } from 'react-redux'
 import { authActions } from '../store'
-import AppUrl from '../'
-import  APPURL  from '../screens/Auth';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
+import LoadingButton from '@mui/lab/LoadingButton';
+
+import APPURL from '../screens/Auth';
 
 const Editor = dynamic(
     () => import('react-draft-wysiwyg').then((mod) => mod.Editor),
-    { ssr:false }
+    { ssr: false }
 )
 
 
+
 function WriteBlog() {
-    APPURL
-    const [age, setAge] = React.useState('');
-    const [blog,setBlog] = useState({
-        title:'',
-        category:''
+
+    const [blog, setBlog] = useState({
+        title: '',
+        category: '',
+        description: ''
     })
 
-     const userToken = useSelector((state) => state.auth.token)
+    const userToken = useSelector((state) => state.auth.token)
     const [image, setImage] = useState(null)
+    const [formError, setFormError] = useState('')
+    const [sucess, setSucess] = useState(false)
+    const [error, setError] = useState(false)
 
-    const [loading,setLoading] = useState
+    const [loading, setLoading] = useState(false)
 
-   const handleChange=(e)=>{
+    const handleChange = (e) => {
         setBlog({
             ...blog,
-            [e.target.name]:e.target.value
+            [e.target.name]: e.target.value
         })
+        setError(false)
+        setSucess(false)
     }
 
-    const handleImage = (e) =>{
+    const handleImage = (e) => {
         setImage(e.target.files[0])
+        setError(false)
+        setSucess(false)
     }
 
     const [editorState, setEditorState] = useState(
@@ -49,100 +60,137 @@ function WriteBlog() {
     );
 
 
-      const submitHandler = (e) => {
-    e.preventDefault()
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", `Token ${userToken}`);
-    var formdata = new FormData();
-    formdata.append("image", image);
-   // formdata.append("description", value);
-    formdata.append("title", blog.title);
 
 
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: formdata,
-    };
+    const submitHandler = async (e) => {
+        e.preventDefault()
+        var myHeaders = new Headers();
+        //   myHeaders.append("Authorization", `Token ${userToken}`);
+        myHeaders.append("Authorization", `Token 6d2b88730c3a212ddf8686f97f9edd238e33bd98`);
+        var formdata = new FormData();
+        formdata.append("image", image);
+        formValid && formdata.append("description", blog.description?.blocks[0]?.text);
+        formdata.append("title", blog.title);
+        formdata.append("category", blog.category);
 
-    setLoading(true)
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: formdata,
+        };
 
-    fetch(`${APPURL}/posts/`, requestOptions)
-      .then(response => response.json())
-      .then(result => {console.log(result)
-        toast.success('post sent for approval')})
-      .catch(error => {console.log('error', error)
-;
-    })
-      
-      setTimeout(() => {
-        setLoading(false)
-      }, 1500);
+        const formValid = blog.title != '' && blog.description?.blocks[0]?.text != '' && blog.category != '' && image != null
 
-  }
+        console.log(blog)
+        if (formValid) {
+            // const response = await fetch(`http://userauth.pythonanywhere.com/posts/`, requestOptions)
+            setLoading(true)
+            const response = await fetch(`http://127.0.0.1:8000/posts/`, requestOptions)
+            const data = await response.json()
+            setLoading(false)
+            console.log(data)
+            if (data && data.created) {
+                setSucess(true)
+                setBlog({
+                    'title': '',
+                    'category': '',
+                })
+                const editorState = EditorState.push(editorState, ContentState.createFromText(''))
+                // setBlog({
+                //     ...blog,
+                //     'decription': editorState
+                // })
+
+            }
+        }
+        else {
+            setError(true)
+        }
+
+    }
+
+
 
     const updateTextDescription = async (state) => {
 
         await setEditorState(state);
 
         const data = convertToRaw(editorState.getCurrentContent());
-       
+
+        setBlog({
+            ...blog,
+            ['description']: data
+        })
+
     };
+
 
 
     return (
 
-            <div>
-                <h2 className='text-center text-3xl my-5'>Write your blog here</h2>
-                <div className='mx-10'>
-                    <TextField className='flex w-3/4 py-5 mx-5 my-3' id="standard-basic" label="Blog Title" variant="standard" name='title'  onChange={handleChange}/>
-                    <div>
-                        <FormControl sx={{ m: 1, minWidth: 390 }}>
-                            <InputLabel id="demo-simple-select-helper-label">Category</InputLabel>
-                            <Select
+        <div>
+            {sucess && <Stack sx={{ width: '100%' }} spacing={2}>
 
-                                labelId="demo-simple-select-helper-label"
-                                id="demo-simple-select-helper"
-                                value={age}
-                                name='category'
-                                label="Age"
-                                onChange={handleChange}
-                            >
-                                <MenuItem value="">
-                                    <em>None</em>
-                                </MenuItem>
-                                <MenuItem value={10}>Ten</MenuItem>
-                                <MenuItem value={20}>Twenty</MenuItem>
-                                <MenuItem value={30}>Thirty</MenuItem>
-                            </Select>
+                <Alert severity="success">Your post has been submitted for review</Alert>
+            </Stack>}
 
-                        </FormControl>
-                    </div>
-                    <div className='my-10'>
-                        <Editor
-                            editorState={editorState}
-                            onEditorStateChange={updateTextDescription}
-                            toolbarClassName="toolbarClassName"
-                            wrapperClassName=""
-                            editorClassName="border-2 border-gray-500 px-5 py-10"
+            {error && <Stack sx={{ width: '100%' }} spacing={2}>
 
+                <Alert severity="warning">Please fill all input fields</Alert>
+            </Stack>}
+            <h2 className='text-center text-3xl my-5'>Write your blog here</h2>
+            <h3 className='text-red-600 text-center'>{formError}</h3>
+            <div className='mx-10'>
+                <TextField className='flex w-3/4 py-5 mx-5 my-3' id="standard-basic" label="Blog Title" variant="standard" name='title'
+                    value={blog.title}
+                    onChange={handleChange} />
+                <div>
+                    <FormControl sx={{ m: 1, minWidth: 390 }}>
+                        <InputLabel id="demo-simple-select-helper-label">Category</InputLabel>
+                        <Select
 
-                        />
-                    </div>
+                            labelId="demo-simple-select-helper-label"
+                            id="demo-simple-select-helper"
+                            value={blog.category}
+                            name='category'
+                            label="Age"
+                            onChange={handleChange}
+                        >
+                            <MenuItem value="">
+                                <em>None</em>
+                            </MenuItem>
+                            <MenuItem value='Tech'>Tech</MenuItem>
+                            <MenuItem value='Politics'>Politics</MenuItem>
+                            <MenuItem value='Fashion'>Fashion</MenuItem>
+                            <MenuItem value='LifeSyle'>LifeSyle</MenuItem>
+                            <MenuItem value='Sport'>Sport</MenuItem>
+                        </Select>
 
-                    <Button className='bg-blue-700' variant="contained" component="label">
-                        Upload Image
-                        <input onChange={handleImage} hidden accept="image/*" multiple type="file" />
-                    </Button>
-
+                    </FormControl>
                 </div>
-                <div className='flex items-center justify-center'>  
-                     <Button className='bg-blue-700 my-10' variant="contained" component="label">POST BLOG</Button>
+                <div className='my-10'>
+                    <Editor
+                        editorState={editorState}
+                        onEditorStateChange={updateTextDescription}
+                        toolbarClassName="toolbarClassName"
+                        wrapperClassName=""
+                        editorClassName="border-2 border-gray-500 px-5 py-10"
+                        value={blog.description}
+                    />
                 </div>
-             
+
+                <Button className='bg-blue-700' variant="contained" component="label">
+                    Upload Image
+                    <input onChange={handleImage} hidden accept="image/*" multiple type="file" />
+                </Button>
 
             </div>
-   
+
+            <div className='flex items-center justify-center'>
+                <LoadingButton loading={loading} onClick={submitHandler} className='bg-blue-700 my-10' variant="contained" component="label">POST BLOG</LoadingButton>
+            </div>
+        </div>
+
     )
 }
 

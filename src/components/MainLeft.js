@@ -3,36 +3,38 @@ import React from 'react'
 import china from '../../public/images/china.jpeg'
 
 import Slider from "react-slick";
+import Link from 'next/link';
 
-function MainLeft({data}) {
-    var settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1
-  };
+function MainLeft({ data }) {
+
     return (
-        <div className='relative mx-8 w-2/3 my-4'>
-   
-            <Slider {...settings}>
-                {data.map((each)=>{
-    return (           <div className='relative p-10'>
-                <div className='mb-0 '>
-                    <Image  width= '900' height='460' objectFit='cover' className='object-cover w-1/4 brightness-50 ' alt='chi' src={each.image} />
-                </div>
-                <div className='z-50 bottom-130 bg-gray-300 p-5'>
-                    <p className='text-center  text-black '>{each.title}</p>
-                </div>
-                  
-               
-            </div>)
-                })}
-            
+        <div className='relative mx-0 lg:mx-8 w-full lg:w-2/3 my-4 pointer'>
 
-  
-            </Slider>
-          
+                     <Link href={{
+                        pathname: `/newsdetail/${data[0].slug}/`,
+                        query: {
+                            name: "news",
+                            image: data[0].image,
+                            description: data[0].description,
+                            title: data[0].title
+
+                        },
+                    }}>
+                <div className=''>
+                    <div className='bg-gray-300 p-5'>
+                        <p className='text-center font-serif text-3xl   text-black '>{data[0].title}</p>
+                    </div>
+                    <div className='mb-0 relative'>
+                        <Image width='900' height='460' objectFit='cover' className='object-cover w-1/4 brightness-50 ' alt='chi' src={data[0].image} />
+                        <p className='absolute bg-red-800 font-bold text-sm bottom-2 px-2 py-5 text-white'>LIFE UPDATES</p>
+                    </div>
+
+                </div>
+
+            </Link>
+
+
+
         </div>
     )
 }

@@ -16,7 +16,7 @@ function HomeScreen({data,data2}) {
 
           <Header />
           {/* {console.log(message)} */}
-          <div className='flex'>
+          <div className='flex-row lg:flex'>
               <MainLeft data={data} />
               <MainRight data={data2} />
           </div>

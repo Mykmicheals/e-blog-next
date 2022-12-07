@@ -1,28 +1,27 @@
-import Image from 'next/image'
+import React from 'react'
 import Link from 'next/link'
-import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import logo from '../../public/images/logo.svg'
-import { authActions } from '../store'
-import Nav from './Nav'
 
-const pClass = 'hover:text-red-700 cursor-pointer hover:border-b border-red-700'
+const pClass = 'hover:text-red-700 cursor-pointer hover:border-b border-red-700 mx-5 mb-8'
 
-function Header() {
+function Nav({ showNav }) {
+
+    var width = showNav ? 'w-2/3' : 'w-0'
+
+    console.log(width)
+  
     const auth = useSelector((state) => state.auth)
     const isLoggedIn = auth.isLoggedIn
-    const [showNav, setNav] = useState(false)
-
     return (
-        <div className='shadow-lg flex px-20 gap-36 py-7 fixed z-50 bg-gray-300 top-0 w-full'>
+        <div className={`bg-gray-400 shadow-2 h-screen ${width} z-10 left-0 fixed top-0 ts`}>
             <Link href='/'>
                 <div className='flex'>
-                    <h1 className='cursor-pointer text-3xl font-bold text-red-600'>Essential</h1>
+                    <h1 className='cursor-pointer text-3xl font-bold text-red-600 my-10 mx-3'>Essential</h1>
                 </div>
             </Link>
 
-
-            <div className='md:flex gap-10 lg:gap-16 my-1 hidden'>
+{console.log(showNav)}
+            <div className='my-2'>
                 <p className={pClass}>Home</p>
                 <p className={pClass}>World Cup</p>
                 <p className={pClass}>Lifestlye</p>
@@ -30,7 +29,7 @@ function Header() {
                 <p className={pClass}>Politics</p>
             </div>
 
-            <div className='lg:flex gap-10 hidden'>
+            <div className='lg:flex gap-10 '>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-red-800 mr-5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                 </svg>
@@ -41,23 +40,12 @@ function Header() {
                     </Link>
                     :
                     <a href='/auth'>
-                        <p className='cursor-pointer bg-red-700 text-white px-3 py-2 rounded'>Login</p>
+                        <p className='cursor-pointer bg-red-700 text-white px-3 w-1/2 mx-5 py-2 rounded'>Login</p>
                     </a>
                 }
             </div>
-            {/* {console.log(showNav)} */}
-            <svg onClick={() => setNav(!showNav)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 absolute cursor-pointer right-20 flex top-8 md:hidden">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
-
-
-            {showNav && <Nav showNav={showNav} />}
-
         </div>
     )
 }
 
-
-
-
-export default Header
+export default Nav

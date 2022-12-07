@@ -27,8 +27,8 @@ function index() {
         <div className='w-full flex'>
            
                {/* {console.log(page.posts)} */}
-            <div className=' h-screen bg-blue-900 w-1/4 text-white rounded-md relative static'>
-                <div className='px-10 py-32'>
+            <div className='w-1/4 text-white rounded-md  '>
+                <div className='px-10 py-32 h-screen fixed left-0 bg-blue-900'>
                     <p className={`${pClass}`}>Home</p>
                     <p onClick={()=>writeHandler('writeBlog')}
                      className={`${pClass} ${page.writeBlog && 'bg-yellow-500 rounded px-3 py-2 '}`}>Write Blog</p>

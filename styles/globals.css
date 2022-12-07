@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-.my-b-h{
+.my-b-h {
     height: 121rem;
+}
+
+.ts {
+    transition: 0.5s;
 }
