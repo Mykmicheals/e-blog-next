@@ -15,6 +15,7 @@ import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import LoadingButton from '@mui/lab/LoadingButton';
 
+
 import APPURL from '../screens/Auth';
 
 const Editor = dynamic(
@@ -65,11 +66,11 @@ function WriteBlog() {
     const submitHandler = async (e) => {
         e.preventDefault()
         var myHeaders = new Headers();
-        //   myHeaders.append("Authorization", `Token ${userToken}`);
-        myHeaders.append("Authorization", `Token 6d2b88730c3a212ddf8686f97f9edd238e33bd98`);
+        myHeaders.append("Authorization", `Token ${userToken}`);
+        //   myHeaders.append("Authorization", `Token 6d2b88730c3a212ddf8686f97f9edd238e33bd98`);
         var formdata = new FormData();
         formdata.append("image", image);
-        formValid && formdata.append("description", blog.description?.blocks[0]?.text);
+        formdata.append("description", blog.description);
         formdata.append("title", blog.title);
         formdata.append("category", blog.category);
 
@@ -79,13 +80,13 @@ function WriteBlog() {
             body: formdata,
         };
 
-        const formValid = blog.title != '' && blog.description?.blocks[0]?.text != '' && blog.category != '' && image != null
+        const formValid = blog.title != '' && blog.description != '' && blog.category != '' && image != null
 
-        console.log(blog)
+
         if (formValid) {
-            // const response = await fetch(`http://userauth.pythonanywhere.com/posts/`, requestOptions)
+            const response = await fetch(`http://userauth.pythonanywhere.com/posts/`, requestOptions)
             setLoading(true)
-            const response = await fetch(`http://127.0.0.1:8000/posts/`, requestOptions)
+            // const response = await fetch(`http://userauth.pythonanywhere.com/posts/`, requestOptions)
             const data = await response.json()
             setLoading(false)
             console.log(data)
@@ -95,11 +96,7 @@ function WriteBlog() {
                     'title': '',
                     'category': '',
                 })
-                const editorState = EditorState.push(editorState, ContentState.createFromText(''))
-                // setBlog({
-                //     ...blog,
-                //     'decription': editorState
-                // })
+                setEditorState(EditorState.createEmpty())
 
             }
         }
@@ -119,7 +116,7 @@ function WriteBlog() {
 
         setBlog({
             ...blog,
-            ['description']: data
+            ['description']: data.blocks[0].text
         })
 
     };
@@ -138,8 +135,7 @@ function WriteBlog() {
 
                 <Alert severity="warning">Please fill all input fields</Alert>
             </Stack>}
-            <h2 className='text-center text-3xl my-5'>Write your blog here</h2>
-            <h3 className='text-red-600 text-center'>{formError}</h3>
+            <h2 className='text-center text-3xl mt-5 mb-1'>Write your blog here</h2>
             <div className='mx-10'>
                 <TextField className='flex w-3/4 py-5 mx-5 my-3' id="standard-basic" label="Blog Title" variant="standard" name='title'
                     value={blog.title}
@@ -167,6 +163,13 @@ function WriteBlog() {
                         </Select>
 
                     </FormControl>
+
+                    <Button className='mx-24 mt-4 bg-blue-700' variant="contained" component="label">
+                        Upload Image
+                        <input onChange={handleImage} hidden accept="image/*" multiple type="file" />
+                    </Button>
+
+
                 </div>
                 <div className='my-10'>
                     <Editor
@@ -179,10 +182,7 @@ function WriteBlog() {
                     />
                 </div>
 
-                <Button className='bg-blue-700' variant="contained" component="label">
-                    Upload Image
-                    <input onChange={handleImage} hidden accept="image/*" multiple type="file" />
-                </Button>
+
 
             </div>
 

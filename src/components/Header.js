@@ -14,7 +14,7 @@ function Header() {
     const [showNav, setNav] = useState(false)
 
     return (
-        <div className='shadow-lg flex px-20 gap-36 py-7 fixed z-50 bg-gray-300 top-0 w-full'>
+        <div className='shadow-lg flex px-20 gap-36 py-7 mb-20 fixed z-50 bg-gray-300 top-0 w-full'>
             <Link href='/'>
                 <div className='flex'>
                     <h1 className='cursor-pointer text-3xl font-bold text-red-600'>Essential</h1>

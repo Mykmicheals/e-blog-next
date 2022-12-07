@@ -20,15 +20,15 @@ function News2({ title, data, category }) {
                     pathname: `/newsdetail/${news[0].slug}/`,
                     query: {
                         name: "news",
-                        image: news[0].image,
-                        description: news[0].description,
-                        title: news[0].title
+                        image: news[9].image,
+                        description: news[9].description,
+                        title: news[9].title
 
                     },
                 }}>
                     <div>
-                        <Image height='590' width='800' objectFit='cover' className='object-cover w-1/4 brightness-50 ' alt='chi' src={news[0]?.image} />
-                        <h2 className={h2Class}>{news[0]?.title}</h2>
+                        <Image height='590' width='800' objectFit='cover' className='object-cover w-1/4 brightness-50 ' alt='chi' src={news[9]?.image} />
+                        <h2 className={h2Class}>{news[9]?.title}</h2>
                     </div>
                 </Link>
                 <Link href={{

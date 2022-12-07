@@ -8,7 +8,7 @@ import Link from 'next/link';
 function MainLeft({ data }) {
 
     return (
-        <div className='relative mx-0 lg:mx-8 w-full lg:w-2/3 my-4 pointer'>
+        <div className='relative mx-0 lg:mx-8 w-full lg:w-2/3 mt-32 pointer'>
 
                      <Link href={{
                         pathname: `/newsdetail/${data[0].slug}/`,

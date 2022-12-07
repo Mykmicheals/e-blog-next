@@ -39,52 +39,52 @@ function NewsSection({data}) {
       <div className='flex justify-center mx-10 my-10 flex-col lg:flex-row'>
 
         <News4
-          title='Politics'
+          title='Sports'
           data={data}
-          category='Politics'
+          category='Sports'
         />
 
 
         <News4
-          title='Politics'
-          data={data}
-          category='Politics'
-        />
-
-
-        <News4
-          title='Politics'
-          data={data}
-          category='Politics'
-        />
-
-
-        <News4
-          title='Politics'
-          data={data}
-          category='Politics'
-        />
-      </div>
-
-      <div className='flex  justify-center mx-10 my-10 flex-col lg:flex-row'>
-
-        <News4
-          title='Tech News'
-          data={data}
-          category='Tech'
-        />
-
-        <News2
-          title='Latest News'
+          title='Featured'
           data={data}
           category='Featured'
         />
 
 
         <News4
-          title='Politics'
+          title='Fashion'
           data={data}
-          category='Politics'
+          category='Fashion'
+        />
+
+
+        <News4
+          title='Lifestyle'
+          data={data}
+          category='Lifestyle'
+        />
+      </div>
+
+      <div className='flex  justify-center mx-10 my-10 flex-col lg:flex-row'>
+
+        <News4
+          title='Trending'
+          data={data}
+          category='Trending'
+        />
+
+        <News2
+          title='Global News'
+          data={data}
+          category='Global'
+        />
+
+
+        <News4
+          title='Weather'
+          data={data}
+          category='Weather'
         />
 
 

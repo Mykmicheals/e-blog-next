@@ -5,10 +5,10 @@ import china from '../../public/images/china.jpeg'
 
 
 
-function index() {
+function Index() {
 
 const fetchPostHandler=async()=>{
-    const response = await fetch('http://127.0.0.1:8000/posts')
+    const response = await fetch('http://userauth.pythonanywhere.com/posts')
     const data = await response.json()
     console.log(data)
 
@@ -52,4 +52,4 @@ useEffect(()=>{
     )
 }
 
-export default index
+export default Index

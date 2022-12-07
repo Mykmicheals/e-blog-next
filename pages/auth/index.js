@@ -1,7 +1,7 @@
 import React from 'react'
 import Auth from '../../src/screens/Auth'
 
-function index() {
+function Index() {
   return (
       <div>
           <Auth />
@@ -9,4 +9,4 @@ function index() {
   )
 }
 
-export default index
+export default Index

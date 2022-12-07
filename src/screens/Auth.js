@@ -8,7 +8,7 @@ import { authActions } from '../store/index';
 
 
 // export const APPURL = 'http://userauth.pythonanywhere.com'
-export const APPURL = 'http://127.0.0.1:8000'
+export const APPURL = 'http://userauth.pythonanywhere.com/'
 
 function Auth() {
     const router = useRouter();
@@ -39,24 +39,26 @@ function Auth() {
 
     async function authHandler() {
         setLoading(true)
-        const response = await fetch(`${APPURL}/${signup ? 'signup/' : 'login/'}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-            },
-            body: JSON.stringify(input),
-        })
+        const response = await fetch(`${APPURL}/${signup ? 'signup/' : 'login/'}`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+                body: JSON.stringify(input),
+            })
         setLoading(false)
         const data = await response.json()
+        console.log(data)
         if (data.token) {
-            router.push('/', { shallow: true })
+            router.push('/dashboard', { shallow: true })
             dispatch(authActions.login())
             dispatch(authActions.setUsername(data.first_name))
             dispatch(authActions.setToken(data.token))
             dispatch(authActions.setEmail(data.email))
 
-        } else if (data.email) {
+        } else if (data.signup_sucess) {
             router.push('/auth/verify')
         }
 
@@ -66,7 +68,7 @@ function Auth() {
     }
 
     return (
-        <div className=''>
+        <div className='my-28'>
             <Header />
             <div className='grid place-items-center my-5 '>
                 <div className='bg-white-100 grid place-items-center  shadow-lg p-10'>
@@ -80,14 +82,14 @@ function Auth() {
                         <TextField onChange={handleInput} className='my-9 block' id="outlined-basic" size='small' type="password" name='password' label="Password" variant="outlined" />
 
                         {signup && <TextField onChange={handleInput} className='my-9 block' id="outlined-basic" size='small' type="password" label="Confirm Password" variant="outlined" />}
-                        
+
                     </div>
                     <LoadingButton loading={fetchLoading} onClick={authHandler} className='hover:bg-red-700 bg-red-600 text-white px-16 '>{signup ? 'Signup' : 'Login'}</LoadingButton>
 
 
                     {signup ? <p className='text-sm my-6'>Already have an account? <span onClick={toggleHandler} className='text-blue-900 mx-3'>Login</span></p> : <div>
-                        <p className='font-mono text-sm mt-8 text-sm'> Don't have an account?<span onClick={toggleHandler} className='text-blue-900 mx-2'>Signup</span></p>
-                        <p className='font-mono text-sm mt-2'> Forgot Password ? <span className='text-blue-900 mx-2'>Reset</span></p>
+                        <p className='font-mono text-sm mt-8 text-sm'> Don't have an account?<span onClick={toggleHandler} className='text-blue-900 mx-2 cursor-pointer'>Signup</span></p>
+                        <p className='font-mono text-sm mt-2'> Forgot Password ? <span className='text-blue-900 mx-2 cursor-pointer'>Reset</span></p>
                     </div>}
 
 

@@ -7,13 +7,14 @@ import TimeAgo from 'javascript-time-ago'
 import TextField from '@mui/material/TextField';
 import en from 'javascript-time-ago/locale/en'
 import Button from '@mui/material/Button';
+import { useSelector } from 'react-redux';
 
 
 TimeAgo.addDefaultLocale(en)
 
 
 
-function index() {
+function Index() {
   const router = useRouter()
   const each = router.query
   const [comment, setComment] = useState('')
@@ -22,10 +23,12 @@ function index() {
     setComment(e.target.value)
   }
 
+  const userToken = useSelector((state) => state.auth.token)
+
   const postComment = async (e) => {
     var myHeaders = new Headers();
-    //   myHeaders.append("Authorization", `Token ${userToken}`);
-    myHeaders.append("Authorization", `Token 6d2b88730c3a212ddf8686f97f9edd238e33bd98`);
+    myHeaders.append("Authorization", `Token ${userToken}`);
+    //  myHeaders.append("Authorization", `Token 6d2b88730c3a212ddf8686f97f9edd238e33bd98`);
     var formdata = new FormData();
     formdata.append("body", comment);
     formdata.append("post", each.id);
@@ -37,7 +40,7 @@ function index() {
       headers: myHeaders,
       body: formdata,
     };
-    const response = await fetch('http://127.0.0.1:8000/comments/', requestOptions)
+    const response = await fetch('http://userauth.pythonanywhere.com/comments/', requestOptions)
     const data = await response.json()
     console.log(data)
   }
@@ -61,8 +64,8 @@ function index() {
 
             <p className='font-mono text-xl leading-10 font-serif'>{each.description}</p>
           </div>
-          <TextField onChange={commentHandler} id="standard-basic" className='my-5 mx-10 block' label="Comment" variant="standard" />
-          <Button onClick={postComment} variant="contained" className='bg-blue-400 block my-5 mx-10'>Comment</Button>
+          {/* <TextField onChange={commentHandler} id="standard-basic" className='my-5 mx-10 block' label="Comment" variant="standard" />
+          <Button onClick={postComment} variant="contained" className='bg-blue-400 block my-5 mx-10'>Comment</Button> */}
 
         </div>
 
@@ -72,4 +75,4 @@ function index() {
   )
 }
 
-export default index
+export default Index
