@@ -28,7 +28,7 @@ function index() {
     myHeaders.append("Authorization", `Token 6d2b88730c3a212ddf8686f97f9edd238e33bd98`);
     var formdata = new FormData();
     formdata.append("body", comment);
-    formdata.append("post", 55);
+    formdata.append("post", each.id);
 
     console.log(typeof (+each.id))
 
