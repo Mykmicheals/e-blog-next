@@ -84,7 +84,7 @@ function WriteBlog() {
 
 
         if (formValid) {
-            const response = await fetch(`http://userauth.pythonanywhere.com/posts/`, requestOptions)
+            const response = await fetch(`https://userauth.pythonanywhere.com/posts/`, requestOptions)
             setLoading(true)
             // const response = await fetch(`http://userauth.pythonanywhere.com/posts/`, requestOptions)
             const data = await response.json()

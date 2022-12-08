@@ -19,7 +19,7 @@ function Posts() {
             headers: myHeaders,
         };
         // const response = await fetch('http://userauth.pythonanywhere.com/my_posts/', requestOptions)
-        const response = await fetch('http://userauth.pythonanywhere.com/my_posts/', requestOptions)
+        const response = await fetch('https://userauth.pythonanywhere.com/my_posts/', requestOptions)
         const data = await response.json()
         setPosts(data)
     }

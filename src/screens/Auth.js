@@ -8,7 +8,7 @@ import { authActions } from '../store/index';
 
 
 // export const APPURL = 'http://userauth.pythonanywhere.com'
-export const APPURL = 'http://userauth.pythonanywhere.com/'
+export const APPURL = 'https://userauth.pythonanywhere.com/'
 
 function Auth() {
     const router = useRouter();

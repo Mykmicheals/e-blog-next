@@ -40,7 +40,7 @@ function Index() {
       headers: myHeaders,
       body: formdata,
     };
-    const response = await fetch('http://userauth.pythonanywhere.com/comments/', requestOptions)
+    const response = await fetch('https://userauth.pythonanywhere.com/comments/', requestOptions)
     const data = await response.json()
     console.log(data)
   }

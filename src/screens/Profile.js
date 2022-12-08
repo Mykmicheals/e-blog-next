@@ -24,7 +24,7 @@ function Profile() {
 
     if (password === password2) {
       setLoading(true)
-      const response = await fetch('http://userauth.pythonanywhere.com/password/change/', {
+      const response = await fetch('https://userauth.pythonanywhere.com/password/change/', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
