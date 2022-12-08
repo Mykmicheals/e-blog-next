@@ -27,7 +27,6 @@ function Index() {
     return (
         <div className='w-full flex'>
 
-            {/* {console.log(page.posts)} */}
             <div className='w-1/4 text-white rounded-md  '>
                 <div className='px-10 py-32 h-screen fixed left-0 bg-blue-900'>
                     <Link href='/'>

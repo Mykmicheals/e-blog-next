@@ -39,7 +39,7 @@ function WriteBlog() {
     const [sucess, setSucess] = useState(false)
     const [error, setError] = useState(false)
 
-    const [loading, setLoading] = useState(false)
+    const [mloading, setLoading] = useState(false)
 
     const handleChange = (e) => {
         setBlog({
@@ -84,12 +84,11 @@ function WriteBlog() {
 
 
         if (formValid) {
-            const response = await fetch(`https://userauth.pythonanywhere.com/posts/`, requestOptions)
             setLoading(true)
-            // const response = await fetch(`http://userauth.pythonanywhere.com/posts/`, requestOptions)
+            const response = await fetch(`https://userauth.pythonanywhere.com/posts/`, requestOptions)
+            
             const data = await response.json()
             setLoading(false)
-            console.log(data)
             if (data && data.created) {
                 setSucess(true)
                 setBlog({
@@ -137,10 +136,13 @@ function WriteBlog() {
             </Stack>}
             <h2 className='text-center text-3xl mt-5 mb-1'>Write your blog here</h2>
             <div className='mx-10'>
-                <TextField className='flex w-3/4 py-5 mx-5 my-3' id="standard-basic" label="Blog Title" variant="standard" name='title'
-                    value={blog.title}
-                    onChange={handleChange} />
-                <div>
+                <div className='py-8'>
+                    <TextField className='flex w-3/4  mx-5 ' id="standard-basic" label="Blog Title" variant="standard" name='title'
+                        value={blog.title}
+                        onChange={handleChange} />
+                </div>
+               
+                <div className='flex gap-5'>
                     <FormControl sx={{ m: 1, minWidth: 390 }}>
                         <InputLabel id="demo-simple-select-helper-label">Category</InputLabel>
                         <Select
@@ -163,11 +165,13 @@ function WriteBlog() {
                         </Select>
 
                     </FormControl>
-
-                    <Button className='mx-24 mt-4 bg-blue-700' variant="contained" component="label">
+            <div className='my-5'>
+                 <Button className='mx-24 mt-4 bg-blue-700' variant="contained" component="label">
                         Upload Image
                         <input onChange={handleImage} hidden accept="image/*" multiple type="file" />
                     </Button>
+            </div>
+                   
 
 
                 </div>
@@ -187,7 +191,7 @@ function WriteBlog() {
             </div>
 
             <div className='flex items-center justify-center'>
-                <LoadingButton loading={loading} onClick={submitHandler} className='bg-blue-700 my-10' variant="contained" component="label">POST BLOG</LoadingButton>
+                <LoadingButton loading={mloading} onClick={submitHandler} className='bg-blue-700 my-10' variant="contained" component="label">POST BLOG</LoadingButton>
             </div>
         </div>
 

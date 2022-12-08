@@ -6,8 +6,6 @@ const pClass = 'hover:text-red-700 cursor-pointer hover:border-b border-red-700 
 
 function Nav({ showNav, width }) {     
    var widths = showNav ? 'w-2/3' : 'w-0'
-     console.log(widths)
-
     const auth = useSelector((state) => state.auth)
     const isLoggedIn = auth.isLoggedIn
     return (
@@ -18,7 +16,7 @@ function Nav({ showNav, width }) {
                 </div>
             </Link>
 
-            {console.log(showNav)}
+
             <div className='my-2'>
                 <p className={pClass}>Home</p>
                 <p className={pClass}>World Cup</p>

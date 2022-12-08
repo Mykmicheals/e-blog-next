@@ -43,12 +43,9 @@ function Profile() {
         setPassword2('')
       }
 
-      console.log(data)
-
     } else {
       setError(true)
     }
-    console.log(password)
 
   }
 

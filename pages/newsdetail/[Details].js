@@ -33,8 +33,6 @@ function Index() {
     formdata.append("body", comment);
     formdata.append("post", each.id);
 
-    console.log(typeof (+each.id))
-
     var requestOptions = {
       method: 'POST',
       headers: myHeaders,
@@ -42,7 +40,7 @@ function Index() {
     };
     const response = await fetch('https://userauth.pythonanywhere.com/comments/', requestOptions)
     const data = await response.json()
-    console.log(data)
+
   }
 
   return (
@@ -53,7 +51,7 @@ function Index() {
 
           <div className='mb-0 '>
             <Image width='900' height='460' objectFit='cover' className='object-cover w-1/4 brightness-50 ' alt='chi' src={each.image} />
-            {console.log(each.time)}
+          
             <p className='my-4 text-red-700 italic'>8 days ago</p>
           </div>
           <div className='my-10 '>

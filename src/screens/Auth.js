@@ -50,7 +50,7 @@ function Auth() {
             })
         setLoading(false)
         const data = await response.json()
-        console.log(data)
+
         if (data.token) {
             router.push('/dashboard', { shallow: true })
             dispatch(authActions.login())
