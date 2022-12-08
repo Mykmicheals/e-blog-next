@@ -4,23 +4,21 @@ import { useSelector } from 'react-redux'
 
 const pClass = 'hover:text-red-700 cursor-pointer hover:border-b border-red-700 mx-5 mb-8'
 
-function Nav({ showNav }) {
+function Nav({ showNav, width }) {     
+   var widths = showNav ? 'w-2/3' : 'w-0'
+     console.log(widths)
 
-    var width = showNav ? 'w-2/3' : 'w-0'
-
-    console.log(width)
-  
     const auth = useSelector((state) => state.auth)
     const isLoggedIn = auth.isLoggedIn
     return (
-        <div className={`bg-gray-400 shadow-2 h-screen ${width} z-10 left-0 fixed top-0 ts`}>
+        <div className={`bg-gray-400 shadow-2 h-screen ${widths} z-10 left-0 fixed top-0 ts`}>
             <Link href='/'>
                 <div className='flex'>
                     <h1 className='cursor-pointer text-3xl font-bold text-red-600 my-10 mx-3'>Essential</h1>
                 </div>
             </Link>
 
-{console.log(showNav)}
+            {console.log(showNav)}
             <div className='my-2'>
                 <p className={pClass}>Home</p>
                 <p className={pClass}>World Cup</p>

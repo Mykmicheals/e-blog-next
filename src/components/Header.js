@@ -47,15 +47,7 @@ function Header() {
                 >
                     <p className={pClass}>Economy</p>
                 </Link>
-                {/* <Link
-                    href={{
-                        pathname: `/allnews/`,
-                        query: {
-                            title: 'Poltics'
-                        },
-                    }}
-                > <p className={pClass}>Politics</p>
-                </Link> */}
+
 
 
                 <Link href={{
@@ -90,9 +82,13 @@ function Header() {
             </svg>
 
 
-            {showNav && <Nav showNav={showNav} />}
+            {showNav &&    
+         
+             <Nav showNav={showNav}   
+                />
 
-        </div>
+             } 
+       </div>
     )
 }
 

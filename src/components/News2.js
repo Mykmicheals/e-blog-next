@@ -34,7 +34,7 @@ function News2({ title, data, category }) {
                     </div>
                 </Link>
                 <Link href={{
-                    pathname: `/newsdetail/${news[0].slug}/`,
+                    pathname: `/newsdetail/${news[1].slug}/`,
                     query: {
                         name: "news",
                         image: news[1].image,

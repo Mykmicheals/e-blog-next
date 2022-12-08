@@ -1,14 +1,14 @@
 import Image from 'next/image'
 import React from 'react'
 import china from '../../public/images/child.jpg'
-    ;
+import moment from 'moment/moment'
 import Link from 'next/link';
 
 export const chinaImage = china
 
 function MainRight({ data }) {
     const trendingNews = data.filter((each) => each.category.name === 'Tech')
-    var shortTrending = trendingNews.splice(2, 6)
+    var shortTrending = trendingNews.splice(2, 5)
 
     return (
 
@@ -32,7 +32,8 @@ function MainRight({ data }) {
                                 <Image width='700' height='400' alt='child' className='rounded-sm ' src={each.image} objectFit="cover" />
                             </div>
                             <div className='w-3/4 mt-5 lg:mt-1'>
-                                <p className='md:w-3/4 text-sm font-mono'>{each.title}</p>
+                                <p className='md:w-3/4 text-sm mb-1 font-mono'>{each.title}</p>
+                                <p className='text-sm text-red-600  pb-2'>{moment(each.created).startOf().fromNow()}</p>
 
                             </div>
                         </div>
