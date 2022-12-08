@@ -81,7 +81,7 @@ function Auth() {
 
                         <TextField onChange={handleInput} className='my-9 block' id="outlined-basic" size='small' type="password" name='password' label="Password" variant="outlined" />
 
-                        {signup && <TextField onChange={handleInput} className='my-9 block' id="outlined-basic" size='small' type="password" label="Confirm Password" variant="outlined" />}
+                        {/* {signup && <TextField onChange={handleInput} className='my-9 block' id="outlined-basic" size='small' type="password" label="Confirm Password" variant="outlined" />} */}
 
                     </div>
                     <LoadingButton loading={fetchLoading} onClick={authHandler} className='hover:bg-red-700 bg-red-600 text-white px-16 '>{signup ? 'Signup' : 'Login'}</LoadingButton>

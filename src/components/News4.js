@@ -23,7 +23,7 @@ function News4({title, data,category}) {
 
         },
       }}>
-        <div>
+        <div className='cursor-pointer'>
           <h3 className={h3Class}>{title}</h3>
           <Image width='450' height='360' objectFit='cover' className='object-cover w-1/4 brightness-50' alt='chi' src={news[0].image} />
           <h2 className={h2Class}>{news[0].title}</h2>
@@ -39,7 +39,7 @@ function News4({title, data,category}) {
 
                 },
               }}>
-                <div >
+                <div className='cursor-pointer'>
                   <p className='text-sm border-b-2 border-gray-300 mt-4 pb-4'>{each.title}.</p>
                 </div>
               </Link>

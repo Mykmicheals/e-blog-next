@@ -26,8 +26,10 @@ function News2({ title, data, category }) {
 
                     },
                 }}>
-                    <div>
-                        <Image height='590' width='800' objectFit='cover' className='object-cover w-1/4 brightness-50 ' alt='chi' src={news[9]?.image} />
+                    <div className='cursor-pointer'>
+                        <Image height='590' width='800' objectFit='cover'
+                            className='object-cover w-1/4 brightness-50'
+                            alt='chi' src={news[9]?.image} />
                         <h2 className={h2Class}>{news[9]?.title}</h2>
                     </div>
                 </Link>
@@ -41,16 +43,16 @@ function News2({ title, data, category }) {
 
                     },
                 }}>
-                    <div className='flex mb-3'>
-                        <div className='w-1/3 mr-6'>
+                    <div className='flex mb-3 cursor-pointer'>
+                        <div className=' w-1/2 md:w-1/3 mr-6'>
                             <Image width='800' height='450' objectFit='cover' className='object-cover brightness-50 ' alt='chi' src={news[1]?.image} />
                         </div>
-                        <h3 className='font-bold my-3 '>{news[1]?.title}</h3>
+                       <h3 className=' my-3 w-1/2 md:w-2/3 text-sm md:text-xl font-mono'>{news[9]?.title}</h3>
 
                     </div>
                 </Link>
 
-                <Link href={{
+                <Link className='cursor-pointer' href={{
                     pathname: `/newsdetail/${news[0].slug}/`,
                     query: {
                         name: "news",
@@ -61,15 +63,17 @@ function News2({ title, data, category }) {
                     },
                 }}>
 
-                    <div className='flex '>
-                        <div className='w-1/3 mr-6'>
+                   <div className='flex mb-3 cursor-pointer'>
+                        <div className=' w-1/2 md:w-1/3 mr-6'>
                             <Image width='800' height='450' objectFit='cover' className='object-cover brightness-50 ' alt='chi' src={news[2]?.image} />
                         </div>
-                        <h3 className='font-bold my-3 '>{news[2]?.title}</h3>
+                        <h3 className=' my-3 w-1/2 md:w-2/3 text-sm md:text-xl font-mono'>{news[2]?.title}</h3>
 
                     </div>
 
                 </Link>
+
+              
             </div>
 
 

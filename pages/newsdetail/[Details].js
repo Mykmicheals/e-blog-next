@@ -48,7 +48,7 @@ function Index() {
   return (
     <div>
       <Header />
-      <div className='flex'>
+      <div className='flex my-28'>
         <div className='relative mx-8 w-full lg:w-2/3 my-4'>
 
           <div className='mb-0 '>
@@ -57,12 +57,12 @@ function Index() {
             <p className='my-4 text-red-700 italic'>8 days ago</p>
           </div>
           <div className='my-10 '>
-            <h3 className='text-center text-2xl font-bold text-black '>{each.title}</h3>
+            <h3 className='text-center text-xl lg:text-2xl font-bold text-black '>{each.title}</h3>
           </div>
 
           <div>
 
-            <p className='font-mono text-xl leading-10 font-serif'>{each.description}</p>
+            <p className='font-mono  lg:text-xl leading-10 font-serif'>{each.description}</p>
           </div>
           {/* <TextField onChange={commentHandler} id="standard-basic" className='my-5 mx-10 block' label="Comment" variant="standard" />
           <Button onClick={postComment} variant="contained" className='bg-blue-400 block my-5 mx-10'>Comment</Button> */}

@@ -14,7 +14,7 @@ function Header() {
     const [showNav, setNav] = useState(false)
 
     return (
-        <div className='shadow-lg flex px-20 gap-36 py-7 mb-20 fixed z-50 bg-gray-300 top-0 w-full'>
+        <div className='shadow-lg flex px-5 lg:px-20 gap-36 py-7 mb-20 fixed z-50 bg-gray-300 top-0 w-full'>
             <Link href='/'>
                 <div className='flex'>
                     <h1 className='cursor-pointer text-3xl font-bold text-red-600'>Essential</h1>
@@ -23,11 +23,50 @@ function Header() {
 
 
             <div className='md:flex gap-10 lg:gap-16 my-1 hidden'>
-                <p className={pClass}>Home</p>
+                <Link href='/'>
+                    <p className={pClass}>Home</p>
+                </Link>
+
                 <p className={pClass}>World Cup</p>
-                <p className={pClass}>Lifestlye</p>
-                <p className={pClass}>Economy</p>
-                <p className={pClass}>Politics</p>
+                <Link href={{
+                    pathname: `/allnews/`,
+                    query: {
+                        title: 'Lifestyle'
+                    },
+                }}>
+                    <p className={pClass}>Lifestlye</p>
+                </Link>
+
+                <Link
+                    href={{
+                        pathname: `/allnews/`,
+                        query: {
+                            title: 'Economy'
+                        },
+                    }}
+                >
+                    <p className={pClass}>Economy</p>
+                </Link>
+                {/* <Link
+                    href={{
+                        pathname: `/allnews/`,
+                        query: {
+                            title: 'Poltics'
+                        },
+                    }}
+                > <p className={pClass}>Politics</p>
+                </Link> */}
+
+
+                <Link href={{
+                    pathname: `/allnews/`,
+                    query: {
+                        title: 'Poltics'
+                    },
+                }}>
+                    <p className={pClass}>Politics</p>
+                </Link>
+
             </div>
 
             <div className='lg:flex gap-10 hidden'>
@@ -46,7 +85,7 @@ function Header() {
                 }
             </div>
             {/* {console.log(showNav)} */}
-            <svg onClick={() => setNav(!showNav)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 absolute cursor-pointer right-20 flex top-8 md:hidden">
+            <svg onClick={() => setNav(!showNav)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 absolute cursor-pointer right-10 lg:right-20 flex top-8 md:hidden">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
             </svg>
 

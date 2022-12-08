@@ -1,55 +1,67 @@
-import React,{useEffect} from 'react'
+import React, { useEffect } from 'react'
 import Header from '../../src/components/Header'
 import Image from 'next/image'
-import china from '../../public/images/china.jpeg'
+import { useRouter } from 'next/router';
+import Link from 'next/link'
+
+import { useSelector } from 'react-redux';
+import { APPURL } from '../../src/screens/Auth';
+import News4 from '../../src/components/News4';
 
 
 
-function Index() {
 
-const fetchPostHandler=async()=>{
-    const response = await fetch('http://userauth.pythonanywhere.com/posts')
-    const data = await response.json()
-    console.log(data)
+function Index({ data }) {
+    const router = useRouter()
+    const path = router.query.title
 
-}
 
-useEffect(()=>{
-    fetchPostHandler()
-},[])
+    const filterData = data.filter((each) => each.category.name === path)
 
     return (
         <div>
             <Header />
-            <div className='flex mx-10 my-12 gap-5'>
-                <div className='w-1/4 pt-10 bg-gray-300 '>
-                    <Image alt='readers image' width='400' height='400' className='mt-10' src={china} />
-                    <h1 className='px-5 text-xl py-3'>This is the title of the readers post</h1>
-                    <p>This is the new description of the readers post </p>
-                </div>
 
-                            <div className='w-1/4 pt-10'>
-                    <Image alt='readers image' width='400' height='400' className='mt-10' src={china} />
-                    <h1>This is the title of the readers post</h1>
-                    <p>This is the new description of the readers post </p>
-                </div>
+            <div className='grid md:grid-cols-2 lg:grid-cols-4 rounded mx-10 my-32 gap-5'>
+                {filterData.map((each) => {
+                    return (
+                
+                        <Link
+                            key={each.id} href={{
+                                pathname: `/newsdetail/${each.slug}/`,
+                                query: {
+                                    // name: "news",
+                                    image: each.image,
+                                    description: each.description,
+                                    title: each.title,
+                                    time: each.created,
+                                    id: each.id
+                                },
+                            }}>
 
-                            <div className='w-1/4 pt-10'>
-                    <Image alt='readers image' width='400' height='400' className='mt-10' src={china} />
-                    <h1>This is the title of the readers post</h1>
-                    <p>This is the new description of the readers post </p>
-                </div>
+                            <div className='w-full bg-gray-100 shadow-lg'>
+                                <Image alt='readers image' width='400' height='400' src={each.image} />
+                                <h1 className='px-5 mx-2 my-3'>{each.title}</h1>
+                                <p className='px-5 mx-2 text-sm my-3'>{each.description.slice(0, 120)} </p>
+                            </div>
+                        </Link>
+                    )
+                })}
 
-                            <div className='w-1/4 pt-10'>
-                    <Image alt='readers image' width='400' height='400' className='mt-10' src={china} />
-                    <h1>This is the title of the readers post</h1>
-                    <p>This is the new description of the readers post </p>
-                </div>
 
             </div>
 
+
         </div>
     )
+}
+
+export async function getServerSideProps() {
+
+    const dataResponse = await fetch(`${APPURL}/news/`)
+    const data = await dataResponse.json()
+
+    return { props: { data }, };
 }
 
 export default Index
