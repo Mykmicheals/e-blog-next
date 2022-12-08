@@ -15,7 +15,7 @@ function MainRight({ data }) {
         <div className=' shadow-2xl p-3 my-12 lg:mt-32 w-full lg:w-1/3 '>
             {shortTrending.map((each) => {
                 return (
-                    <Link href={{
+                    <Link key={each.id} href={{
                         pathname: `/newsdetail/${each.slug}/`,
                         query: {
                             name: "news",
@@ -26,7 +26,7 @@ function MainRight({ data }) {
                             id: each.id
                         },
                     }}>
-                        <div key={each.id} className='flex my-3 gap-2 border-b border-gray-400' >
+                        <div  className='flex my-3 gap-2 border-b border-gray-400' >
                             <div className=' w-80 lg:w-40 ml-1 mr-3'>
                                 <Image width='700' height='400' alt='child' className='rounded-sm ' src={each.image} objectFit="cover" />
                             </div>

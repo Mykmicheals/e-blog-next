@@ -29,7 +29,7 @@ function News4({title, data,category}) {
           <h2 className={h2Class}>{news[0].title}</h2>
           {shortNews.map((each) => {
             return (
-              <Link href={{
+              <Link key={each.id} href={{
                 pathname: `/newsdetail/${each.slug}/`,
                 query: {
                   name: "news",
@@ -39,7 +39,7 @@ function News4({title, data,category}) {
 
                 },
               }}>
-                <div key={each.id}>
+                <div >
                   <p className='text-sm border-b-2 border-gray-300 mt-4 pb-4'>{each.title}.</p>
                 </div>
               </Link>

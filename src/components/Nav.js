@@ -39,9 +39,9 @@ function Nav({ showNav }) {
                         <p className='cursor-pointer bg-red-700 text-white px-3 py-2 rounded'>Dashboard</p>
                     </Link>
                     :
-                    <a href='/auth'>
+                    <Link href='/auth'>
                         <p className='cursor-pointer bg-red-700 text-white px-3 w-1/2 mx-5 py-2 rounded'>Login</p>
-                    </a>
+                    </Link>
                 }
             </div>
         </div>

@@ -88,7 +88,7 @@ function Auth() {
 
 
                     {signup ? <p className='text-sm my-6'>Already have an account? <span onClick={toggleHandler} className='text-blue-900 mx-3'>Login</span></p> : <div>
-                        <p className='font-mono text-sm mt-8 text-sm'> Don't have an account?<span onClick={toggleHandler} className='text-blue-900 mx-2 cursor-pointer'>Signup</span></p>
+                        <p className='font-mono text-sm mt-8 text-sm'> Don&apos;t have an account?<span onClick={toggleHandler} className='text-blue-900 mx-2 cursor-pointer'>Signup</span></p>
                         <p className='font-mono text-sm mt-2'> Forgot Password ? <span className='text-blue-900 mx-2 cursor-pointer'>Reset</span></p>
                     </div>}
 

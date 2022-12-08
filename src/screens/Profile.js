@@ -67,7 +67,7 @@ function Profile() {
       <h2 className='text-center text-3xl my-5'>My Profile</h2>
 
       <div className='flex justify-center my-10'>
-        <Image className='rounded-full ' src={chinaImage} height='100' width='100' objectFit="cover" />
+        <Image className='rounded-full ' alt='profile' src={chinaImage} height='100' width='100' objectFit="cover" />
       </div>
       <div className='flex gap-16 justify-center'>
         <TextField id="standard-basic" value={username} />

@@ -40,9 +40,9 @@ function Header() {
                         <p className='cursor-pointer bg-red-700 text-white px-3 py-2 rounded'>Dashboard</p>
                     </Link>
                     :
-                    <a href='/auth'>
+                    <Link href='/auth'>
                         <p className='cursor-pointer bg-red-700 text-white px-3 py-2 rounded'>Login</p>
-                    </a>
+                    </Link>
                 }
             </div>
             {/* {console.log(showNav)} */}
