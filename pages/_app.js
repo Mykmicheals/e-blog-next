@@ -8,35 +8,26 @@ import Spinner from '../src/components/Spinner'
 
 
 function MyApp({ Component, pageProps }) {
-  const [isLoading, setIsLoading] = useState(true)
+ 
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    const start = () => {
-      setLoading(true);
-    };
-    const end = () => {
-  
-      setLoading(false);
-    };
-    Router.events.on("routeChangeStart", start);
-    Router.events.on("routeChangeComplete", end);
-    Router.events.on("routeChangeError", end);
+    Router.events.on("routeChangeStart", () => setLoading(true));
+    Router.events.on("routeChangeComplete", () => setLoading(false));
+    Router.events.on("routeChangeError", () => setLoading(false));
     return () => {
-      Router.events.off("routeChangeStart", start);
-      Router.events.off("routeChangeComplete", end);
-      Router.events.off("routeChangeError", end);
+      Router.events.off("routeChangeStart", () => setLoading(true));
+      Router.events.off("routeChangeComplete", () => setLoading(false));
+      Router.events.off("routeChangeError", () => setLoading(false));
     };
   }, [Router.events])
 
 
 
-  const router = useRouter()
-
   return <Provider store={store}>
     {loading ? (
-      // <h1>Loading...</h1>
-      <Spinner />
+      // <Spinner />
+    <p>loafing</p>
     ) : (
       <Component {...pageProps} />
     )}
