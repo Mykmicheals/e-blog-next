@@ -9,11 +9,9 @@ import { APPURL } from '../../src/screens/Auth';
 import News4 from '../../src/components/News4';
 
 
-function Index({ data, posts }) {
+function Index({ data }) {
     const router = useRouter()
     const path = router.query.title
-
-    var name = router.query.name
 
 
     const filterData = data.filter((each) => each.category.name === path)
@@ -23,31 +21,7 @@ function Index({ data, posts }) {
             <Header />
 
             <div className='grid md:grid-cols-2 lg:grid-cols-4 rounded mx-10 my-32 gap-5'>
-
-                {name === 'posts' ? posts.map((each) => {
-                    return (
-
-                        <Link
-                            key={each.id} href={{
-                                pathname: `/newsdetail/${each.slug}/`,
-                                query: {
-                                    // name: "news",
-                                    image: each.image,
-                                    description: each.description,
-                                    title: each.title,
-                                    time: each.created,
-                                    id: each.id
-                                },
-                            }}>
-
-                            <div className='w-full bg-gray-100 shadow-lg'>
-                                <Image alt='readers image' width='400' height='400' src={each.image} />
-                                <h1 className='px-5 mx-2 my-3'>{each.title}</h1>
-                                <p className='px-5 mx-2 text-sm my-3'>{each.description.slice(0, 120)} </p>
-                            </div>
-                        </Link>
-                    )
-                }) : filterData.map((each) => {
+                {filterData.map((each) => {
                     return (
 
                         <Link
@@ -72,8 +46,6 @@ function Index({ data, posts }) {
                     )
                 })}
 
-                { }
-
 
             </div>
 
@@ -84,13 +56,10 @@ function Index({ data, posts }) {
 
 export async function getServerSideProps() {
 
-    const dataResponse = await fetch(`${APPURL}/news/`)
+    const dataResponse = await fetch(`${APPURL}//`)
     const data = await dataResponse.json()
 
-    const p = await fetch(`${APPURL}/posts/`)
-    const posts = await p.json()
-
-    return { props: { data, posts }, };
+    return { props: { data }, };
 }
 
 export default Index

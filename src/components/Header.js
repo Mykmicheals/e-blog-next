@@ -27,11 +27,21 @@ function Header() {
                     <p className={pClass}>Home</p>
                 </Link>
 
-                <p className={pClass}>World Cup</p>
                 <Link href={{
                     pathname: `/allnews/`,
                     query: {
-                        title: 'Lifestyle'
+                        title: 'posts',
+                        name: 'posts'
+                    },
+                }}>
+
+                    <p className={pClass}>User Posts</p>
+                </Link>
+                <Link href={{
+                    pathname: `/allnews/`,
+                    query: {
+                        title: 'Lifestyle',
+                        name: 'lifestyle'
                     },
                 }}>
                     <p className={pClass}>Lifestlye</p>
@@ -41,7 +51,8 @@ function Header() {
                     href={{
                         pathname: `/allnews/`,
                         query: {
-                            title: 'Economy'
+                            title: 'Economy',
+                            name: 'economy'
                         },
                     }}
                 >
@@ -53,7 +64,8 @@ function Header() {
                 <Link href={{
                     pathname: `/allnews/`,
                     query: {
-                        title: 'Poltics'
+                        title: 'Poltics',
+                        name: 'politics'
                     },
                 }}>
                     <p className={pClass}>Politics</p>
@@ -76,19 +88,19 @@ function Header() {
                     </Link>
                 }
             </div>
-        
+
             <svg onClick={() => setNav(!showNav)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 absolute cursor-pointer right-10 lg:right-20 flex top-8 md:hidden">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
             </svg>
 
 
-            {showNav &&    
-         
-             <Nav showNav={showNav}   
+            {showNav &&
+
+                <Nav showNav={showNav}
                 />
 
-             } 
-       </div>
+            }
+        </div>
     )
 }
 

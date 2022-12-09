@@ -21,7 +21,9 @@ function News4({ title, data, category }) {
           name: "news",
           image: news[0].image,
           description: news[0].description,
-          title: news[0].title
+          title: news[0].title,
+          category: news[0].category
+
 
         },
       }}>
@@ -29,7 +31,7 @@ function News4({ title, data, category }) {
           <h3 className={h3Class}>{title}</h3>
           <Image width='450' height='360' objectFit='cover' className='object-cover w-1/4 brightness-50' alt='chi' src={news[0].image} />
           <h2 className={h2Class}>{news[0].title}</h2>
-  
+
           {shortNews.map((each) => {
             return (
               <Link key={each.id} href={{
@@ -38,12 +40,13 @@ function News4({ title, data, category }) {
                   name: "news",
                   image: each.image,
                   description: each.description,
-                  title: each.title
+                  title: each.title,
+                  category: each.category
 
                 },
               }}>
                 <div className='cursor-pointer'>
-                  
+
                   <p className='text-sm  border-gray-300 mt-4 mb-2'>{each.title}.</p>
                   <p className='text-sm text-red-600 border-b-2 pb-2'>{moment(each.created).startOf().fromNow()}</p>
                 </div>

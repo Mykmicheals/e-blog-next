@@ -24,7 +24,8 @@ function MainRight({ data }) {
                                 description: each.description,
                                 title: each.title,
                                 time: each.created,
-                                id: each.id
+                                id: each.id,
+                                category: 'Tech'
                             },
                         }}>
                         <div className='flex my-3 gap-2 border-b border-gray-400 cursor-pointer' >

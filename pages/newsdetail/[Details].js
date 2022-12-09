@@ -1,27 +1,49 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from '../../src/components/Header';
 import { useRouter } from 'next/router';
 import MainRight from '../../src/components/MainRight';
+import Footer from '../../src/components/Footer';
 import Image from 'next/image'
-import TimeAgo from 'javascript-time-ago'
 import TextField from '@mui/material/TextField';
 import en from 'javascript-time-ago/locale/en'
 import Button from '@mui/material/Button';
 import { useSelector } from 'react-redux';
-
-
-TimeAgo.addDefaultLocale(en)
+import { APPURL } from '../../src/screens/Auth';
+import moment from 'moment/moment'
+import Link from 'next/link';
 
 
 
 function Index() {
+
+  const [posts, setPosts] = useState([])
   const router = useRouter()
   const each = router.query
   const [comment, setComment] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const commentHandler = (e) => {
     setComment(e.target.value)
   }
+
+  const fetchPost = async () => {
+    setLoading(true)
+    const response = await fetch(`${APPURL}/news`)
+    const data = await response.json()
+    const filteredData = data.filter((post) => post.category.name === 'Politics')
+    setLoading(false)
+    //  const news = data.filter((each) => each.category.name === category)
+    setPosts(filteredData)
+
+  }
+
+  useEffect(() => {
+    fetchPost()
+
+  }, [])
+
+
+  var relatedPosts = posts.splice(0, 10)
 
   const userToken = useSelector((state) => state.auth.token)
 
@@ -40,18 +62,18 @@ function Index() {
     };
     const response = await fetch('https://userauth.pythonanywhere.com/comments/', requestOptions)
     const data = await response.json()
-
   }
+
 
   return (
     <div>
       <Header />
       <div className='flex my-28'>
-        <div className='relative mx-8 w-full lg:w-2/3 my-4'>
+        <div className='relative mx-8 w-full  my-4'>
 
           <div className='mb-0 '>
-            <Image width='900' height='460' objectFit='cover' className='object-cover w-1/4 brightness-50 ' alt='chi' src={each.image} />
-          
+            <Image width='1900' height='960' objectFit='cover' className='object-cover w-1/4 brightness-50 ' alt='chi' src={each.image} />
+
             <p className='my-4 text-red-700 italic'>8 days ago</p>
           </div>
           <div className='my-10 '>
@@ -62,12 +84,15 @@ function Index() {
 
             <p className='font-mono  lg:text-xl leading-10 font-serif'>{each.description}</p>
           </div>
+          <button classname='bg-blue-500 p-3' onClick={() => { router.push('/', undefined, { shallow: true }) }}>Back</button>
           {/* <TextField onChange={commentHandler} id="standard-basic" className='my-5 mx-10 block' label="Comment" variant="standard" />
           <Button onClick={postComment} variant="contained" className='bg-blue-400 block my-5 mx-10'>Comment</Button> */}
 
         </div>
 
       </div>
+
+      <Footer />
 
     </div>
   )

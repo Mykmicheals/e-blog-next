@@ -2,6 +2,7 @@ import React from 'react'
 import china from '../../public/images/china.jpeg'
 import Image from 'next/image'
 import Link from 'next/link'
+import moment from 'moment/moment'
 
 
 var h3Class = 'bg-gray-200 px-2 py-3 font-bold'
@@ -22,7 +23,8 @@ function News2({ title, data, category }) {
                         name: "news",
                         image: news[9].image,
                         description: news[9].description,
-                        title: news[9].title
+                        title: news[9].title,
+                        category: news[9].category
 
                     },
                 }}>
@@ -39,7 +41,8 @@ function News2({ title, data, category }) {
                         name: "news",
                         image: news[1].image,
                         description: news[1].description,
-                        title: news[1].title
+                        title: news[1].title,
+                        category: news[1].category
 
                     },
                 }}>
@@ -47,8 +50,8 @@ function News2({ title, data, category }) {
                         <div className=' w-1/2 md:w-1/3 mr-6'>
                             <Image width='800' height='450' objectFit='cover' className='object-cover brightness-50 ' alt='chi' src={news[1]?.image} />
                         </div>
-                       <h3 className=' my-3 w-1/2 md:w-2/3 text-sm md:text-xl font-mono'>{news[9]?.title}</h3>
-
+                        <h3 className=' my-3 w-1/2 md:w-2/3 text-sm md:text-xl font-mono'>{news[9]?.title}</h3>
+                        {/* <p className='text-sm text-red-600 border-b-2 pb-2'>{moment(news[9]?.created).startOf().fromNow()}</p> */}
                     </div>
                 </Link>
 
@@ -58,12 +61,13 @@ function News2({ title, data, category }) {
                         name: "news",
                         image: news[0].image,
                         description: news[0].description,
-                        title: news[0].title
+                        title: news[0].title,
+                        category: news[0].category
 
                     },
                 }}>
 
-                   <div className='flex mb-3 cursor-pointer'>
+                    <div className='flex mb-3 cursor-pointer'>
                         <div className=' w-1/2 md:w-1/3 mr-6'>
                             <Image width='800' height='450' objectFit='cover' className='object-cover brightness-50 ' alt='chi' src={news[2]?.image} />
                         </div>
@@ -73,7 +77,7 @@ function News2({ title, data, category }) {
 
                 </Link>
 
-              
+
             </div>
 
 
