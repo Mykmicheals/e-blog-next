@@ -82,7 +82,7 @@ function Index({ data, posts }) {
     )
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
 
     const dataResponse = await fetch(`${APPURL}/news/`)
     const data = await dataResponse.json()
