@@ -8,7 +8,8 @@ const authState = {
 }
 
 const initialNews = {
-    news:[]
+    news: [],
+    posts: []
 }
 
 
@@ -21,11 +22,11 @@ const authSlice = createSlice({
         },
         setUsername(state, action) {
             state.username = action.payload
-        },   
-         setToken(state, action) {
+        },
+        setToken(state, action) {
             state.token = action.payload
         },
-         setEmail(state, action) {
+        setEmail(state, action) {
             state.email = action.payload
         },
     }
@@ -33,11 +34,14 @@ const authSlice = createSlice({
 
 
 const newsSlice = createSlice({
-    name :'news',
-    initialState:initialNews,
-    reducers:{
-        storeNews(state, action){
+    name: 'news',
+    initialState: initialNews,
+    reducers: {
+        storeNews(state, action) {
             state.news = action.payload
+        },
+        storePosts(state, action) {
+            state.posts = action.payload
         }
     }
 })

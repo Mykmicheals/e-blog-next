@@ -7,7 +7,7 @@ import { APPURL } from '../src/screens/Auth';
 import { useRouter } from 'next/router';
 import Footer from '../src/components/Footer';
 
-export default function Home({ data, response2 }) {
+export default function Home({ data, response2, posts }) {
 
   const router = useRouter()
 
@@ -20,7 +20,9 @@ export default function Home({ data, response2 }) {
     <Provider store={store}>
       <HomeScreen
         data={data}
-        data2={response2} />
+        data2={response2}
+        posts={posts}
+      />
 
       <Footer />
     </Provider>
@@ -31,21 +33,16 @@ export default function Home({ data, response2 }) {
 export async function getStaticProps() {
 
   const response = await fetch(`${APPURL}/slider/`)
+  const data = await response.json()
+
   const dataResponse = await fetch(`${APPURL}/news/`)
   const response2 = await dataResponse.json()
+
+  const postResponse = await fetch(`${APPURL}/posts`)
+  const posts = await postResponse.json()
+
   // dispatch()
-  const data = await response.json()
-  return { props: { data, response2 }, revalidate: 3600 };
+
+  return { props: { data, response2, posts }, revalidate: 3600 };
 }
 
-
-
-// Home.getInitialProps = async()=> {
-
-//   const response = await fetch(`${APPURL}/slider/`)
-//   const dataResponse = await fetch(`${APPURL}/news/`)
-//   const response2 = await dataResponse.json()
-//   // dispatch()
-//   const data = await response.json()
-//   return { props: { data, response2 }, };
-// }

@@ -9,17 +9,20 @@ import { APPURL } from '../../src/screens/Auth';
 import News4 from '../../src/components/News4';
 
 
-function Index({ data, posts }) {
+
+function Index({ }) {
     const router = useRouter()
     const path = router.query.title
 
     var name = router.query.name
-
-
-    const filterData = data.filter((each) => each.category.name === path)
+    const news = useSelector((state) => state.news.news)
+    const posts = useSelector((state) => state.news.posts)
+    const filterData = news.filter((each) => each.category.name === path)
 
     return (
         <div>
+            {/* {console.log(posts)} */}
+            {console.log(news)}
             <Header />
 
             <div className='grid md:grid-cols-2 lg:grid-cols-4 rounded mx-10 my-32 gap-5'>
@@ -82,15 +85,15 @@ function Index({ data, posts }) {
     )
 }
 
-export async function getStaticProps() {
+// export async function getStaticProps() {
 
-    const dataResponse = await fetch(`${APPURL}/news/`)
-    const data = await dataResponse.json()
+//     const dataResponse = await fetch(`${APPURL}/news/`)
+//     const data = await dataResponse.json()
 
-    const p = await fetch(`${APPURL}/posts/`)
-    const posts = await p.json()
+//     const p = await fetch(`${APPURL}/posts/`)
+//     const posts = await p.json()
 
-    return { props: { data, posts }, };
-}
+//     return { props: { data, posts }, };
+// }
 
 export default Index

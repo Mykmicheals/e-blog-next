@@ -3,26 +3,27 @@ import Header from '../components/Header'
 import MainLeft from '../components/MainLeft';
 import MainRight from '../components/MainRight';
 import NewsSection from '../components/NewsSection';
-//import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { newsActions } from '../store';
 
-//import newsActions from '../store/index'
 
-function HomeScreen({ data, data2 }) {
-  // const dispatch = useDispatch()
+function HomeScreen({ data, data2, posts }) {
+  const dispatch = useDispatch()
 
-  // const updateData = () => {
-  //   dispatch(newsActions.storeNews(data))
-  // }
+  const updateData = () => {
+    dispatch(newsActions.storeNews(data2))
+    dispatch(newsActions.storePosts(posts))
+  }
 
-  // useEffect(() => {
-  //   updateData()
-  // })
+  useEffect(() => {
+    updateData()
+  })
 
   return (
     <div className=''>
 
       <Header />
-
+      {console.log(posts)}
       <div className='flex-row lg:flex'>
         <MainLeft data={data} />
         <MainRight data={data2} />
