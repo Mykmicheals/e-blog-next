@@ -6,7 +6,7 @@ function Spinner() {
         <div>
             <Header />
             <div className='grid h-screen place-items-center '>
-                <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
             </div>
 
         </div>

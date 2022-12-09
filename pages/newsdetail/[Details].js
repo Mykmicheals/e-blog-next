@@ -84,7 +84,7 @@ function Index() {
 
             <p className='font-mono  lg:text-xl leading-10 font-serif'>{each.description}</p>
           </div>
-          <button classname='bg-blue-500 p-3' onClick={() => { router.push('/', undefined, { shallow: true }) }}>Back</button>
+          <button className='bg-blue-500 p-3' onClick={() => { router.push('/', undefined, { shallow: true }) }}>Back</button>
           {/* <TextField onChange={commentHandler} id="standard-basic" className='my-5 mx-10 block' label="Comment" variant="standard" />
           <Button onClick={postComment} variant="contained" className='bg-blue-400 block my-5 mx-10'>Comment</Button> */}
 
