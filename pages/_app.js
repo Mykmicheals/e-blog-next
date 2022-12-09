@@ -13,11 +13,10 @@ function MyApp({ Component, pageProps }) {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     const start = () => {
-      console.log("start");
       setLoading(true);
     };
     const end = () => {
-      console.log("findished");
+  
       setLoading(false);
     };
     Router.events.on("routeChangeStart", start);
@@ -28,7 +27,7 @@ function MyApp({ Component, pageProps }) {
       Router.events.off("routeChangeComplete", end);
       Router.events.off("routeChangeError", end);
     };
-  }, [router.events])
+  }, [Router.events])
 
 
 
